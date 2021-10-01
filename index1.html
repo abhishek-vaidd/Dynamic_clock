@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Clock</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body onload="initclock()">   <!--This will make click appear when the page is loaded--> 
+
+    <a class="anch" href="index.html">
+        <div class="datetime"> <!--Container in which all the items are contained-->
+        <div class="date">
+            <span id="dayname">Day</span>,
+            <span id="month">Month</span>
+            <span id="daynum">00</span>,
+            <span id="year">Year</span>
+        </div>
+        <div class="time">
+            <span id="hour">00</span>:
+            <span id="Minutes">00</span>:
+            <span id="Seconds">00</span>
+            <span id="Peroids">AM</span>
+        </div>
+    </div>
+    </a>
+
+<script type="text/javascript">
+    
+    function updateclock(){
+        var now= new Date(); // Fetching information for time,date,etc
+        var dname= now.getDay(), // Declaring variables for getting there respective values 
+            mo= now.getMonth(),
+            dnumm= now.getDate(),
+            yr= now.getFullYear(),
+            hou= now.getHours(),
+            min= now.getMinutes(),
+            sec= now.getSeconds(),
+            pe= "AM";
+            
+            if(hou==0) //This will make hours print in Format like 1,2,3,4,5,6,7,8,9,10,11,12,0,1,2,3...so on, not in 24 hr format 
+            {
+                hou=12;
+            }
+            if(hou>12)
+            {
+                hou = hou-12;
+                pe="PM";
+            }
+
+            Number.prototype.pad= function(digits){ // This will make our clock hours,minutes,second to print in 2 digits instead of one example--> 01,02,03,09,etc
+                for(var n= this.toString(); n.length<digits; n = 0 + n);
+                return n;
+            }
+
+            var month = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October ", "November", "December"]; //I have declared some array for retrieval of Name of the Week and Name of the number instead of Digits for the week and the months
+            var week = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            var ids= ["dayname","month","daynum","year","hour","Minutes","Seconds","Peroids"];
+            var values = [week[dname],month[mo],dnumm.pad(2),yr,hou.pad(2),min.pad(2),sec.pad(2),pe];
+            for(var i = 0; i<ids.length; i++) // This for loop is selecting all the variables (i.e.. Week,Date,Month) one by one and filling them with the values it is a simple logic used with for loop
+            document.getElementById(ids[i]).firstChild.nodeValue= values[i]; //Every node value is getting filled one by one
+        }
+    
+    function initclock(){  //Initailizing the clock by calling update clock function and also for refreshing of the clock the set Interval is used which will make the clock work
+        updateclock();
+        window.setInterval("updateclock()",1);
+    }
+
+</script>
+</body>
+</html>
