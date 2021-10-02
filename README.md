@@ -1,1 +1,2 @@
 # Dynamic_clock
+This is a mini-project to demonstrate JavaScript functionality to the HTML page complemented with CSS, by making a dynamic clock to print week, month, date, time, etc on the web page. I've used JavaScript functionality which automatically refresh the time, second by second without having refreshing the page. I've designed these whole two pages which are connected to each other, so if a user may click on the time it will take him to the next page.
